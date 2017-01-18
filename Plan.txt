@@ -1,0 +1,11 @@
+Jan 10 to Jan 28, 18 days.
+
+If it has any problem, delay to next day.
+
+1.Make the Graphics User Interface.
+2.Make the DiaryPage class.
+3.Make the Diary class.
+4.Make File utils.
+4to5.Dock GUI and those class.
+5.Make Style sheet.
+6.Test, if it has a bug, fix it and test.

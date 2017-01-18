@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.onsn.data.DiaryPageTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-01-14T11:58:31" hostname="Cinema3D-PC" time="0.004">
+  <properties/>
+  <testcase name="getTime" classname="com.github.onsn.data.DiaryPageTest" time="0.003"/>
+  <testcase name="getRealTime" classname="com.github.onsn.data.DiaryPageTest" time="0.001"/>
+  <testcase name="getTitle" classname="com.github.onsn.data.DiaryPageTest" time="0.0"/>
+  <testcase name="getContent" classname="com.github.onsn.data.DiaryPageTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

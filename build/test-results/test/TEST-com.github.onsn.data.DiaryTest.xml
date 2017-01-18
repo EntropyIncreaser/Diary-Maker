@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.onsn.data.DiaryTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2017-01-14T11:58:31" hostname="Cinema3D-PC" time="0.005">
+  <properties/>
+  <testcase name="addPages" classname="com.github.onsn.data.DiaryTest" time="0.0"/>
+  <testcase name="addPage" classname="com.github.onsn.data.DiaryTest" time="0.0"/>
+  <testcase name="remove" classname="com.github.onsn.data.DiaryTest" time="0.0"/>
+  <testcase name="getAllPages" classname="com.github.onsn.data.DiaryTest" time="0.002"/>
+  <testcase name="addPageTo" classname="com.github.onsn.data.DiaryTest" time="0.0"/>
+  <testcase name="getPage" classname="com.github.onsn.data.DiaryTest" time="0.0"/>
+  <testcase name="getModificationTime" classname="com.github.onsn.data.DiaryTest" time="0.0"/>
+  <testcase name="getCreateTime" classname="com.github.onsn.data.DiaryTest" time="0.0"/>
+  <testcase name="addPagesTo" classname="com.github.onsn.data.DiaryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
