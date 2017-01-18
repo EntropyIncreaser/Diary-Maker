@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.github.onsn.data.JsonConverterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-01-14T11:58:31" hostname="Cinema3D-PC" time="0.065">
-  <properties/>
-  <testcase name="fromAndTo" classname="com.github.onsn.data.JsonConverterTest" time="0.065"/>
-  <system-out><![CDATA[{"pagesList":[{"time":"0","title":"1","content":"2","realTime":1484395111343},{"time":"1","title":"2","content":"3","realTime":1484395111343}],"createTime":1484395111343,"modificationTime":1484395111343}
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
