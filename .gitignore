@@ -1,0 +1,7 @@
+#Intel llij
+
+/build/
+/build/*.*
+/.idea/
+/.idea/*
+/.idea/*.*
