@@ -9,17 +9,24 @@ package com.github.onsn.data;
 public class DiaryPage {
     /* --- Fields --- */
     /** Display time */
-    private final String time;
+    private String time;
 
     /** Display title */
-    private final String title;
+    private String title;
 
     /** Display content */
-    private final String content;
+    private String content;
+
+    /** The real create time. */
+    private long realCreateTime;
 
     /** The real modification time */
-    private final long realTime;
+    private long realModificationTime;
 
+    public DiaryPage() {
+        this.realCreateTime = System.currentTimeMillis();
+        this.realModificationTime = this.realCreateTime;
+    }
 
     /**
      * A default constructor for {@code DiaryPage}.
@@ -31,7 +38,7 @@ public class DiaryPage {
         this.time = time;
         this.title = title;
         this.content = content;
-        this.realTime = System.currentTimeMillis();
+        this.realModificationTime = System.currentTimeMillis();
     }
 
 
@@ -39,11 +46,12 @@ public class DiaryPage {
      * A constructor for the custom real time.<br/>
      * Params: {@link DiaryPage#DiaryPage(String, String, String)}
      */
-    public DiaryPage(String time, String title, String content, long realTime) {
+    public DiaryPage(String time, String title, String content, long realCreateTime) {
         this.time = time;
         this.title = title;
         this.content = content;
-        this.realTime = realTime;
+        this.realCreateTime = realCreateTime;
+        this.realModificationTime = realCreateTime;
     }
 
 
@@ -69,10 +77,57 @@ public class DiaryPage {
     }
 
     /**
-     * Getter for the realTime field.
+     * Getter for the realCreateTime field.
      */
-    public long getRealTime() {
-        return realTime;
+    public long getRealCreateTime() {
+        return realCreateTime;
+    }
+
+    /**
+     * Getter for the realModificationTime field.
+     */
+    public long getRealModificationTime() {
+        return realModificationTime;
+    }
+
+    /**
+     * Setter for the time field.
+     */
+    public void setTime(String time) {
+        this.time = time;
+        this.realModificationTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Setter for the title field.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+        this.realModificationTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Setter for the content field.
+     */
+    public void setContent(String content) {
+        this.content = content;
+        this.realModificationTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Setter for the realCreateTime field.
+     */
+    public void setRealCreateTime(long realCreateTime) {
+        this.realCreateTime = realCreateTime;
+        this.realModificationTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Setter for the realModificationTime field.
+     */
+    public void setRealModificationTime(long realModificationTime) {
+        this.realModificationTime = realModificationTime;
+        this.realModificationTime = System.currentTimeMillis();
     }
 
     /**
@@ -91,7 +146,7 @@ public class DiaryPage {
         int result = getTime() != null ? getTime().hashCode() : 0;
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
         result = 31 * result + (getContent() != null ? getContent().hashCode() : 0);
-        result = 31 * result + (int) (getRealTime() ^ (getRealTime() >>> 32));
+        result = 31 * result + (int) (getRealModificationTime() ^ (getRealModificationTime() >>> 32));
         return result;
     }
 
@@ -104,7 +159,8 @@ public class DiaryPage {
                 "time='" + time + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", realTime=" + realTime +
+                ", realCreateTime=" + realCreateTime +
+                ", realModificationTime=" + realModificationTime +
                 '}';
     }
 }

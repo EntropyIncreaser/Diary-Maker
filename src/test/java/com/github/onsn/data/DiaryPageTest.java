@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class DiaryPageTest {
     @Test
     public void getRealTime() throws Exception {
-        assertEquals(14, new DiaryPage("", "", "", 14).getRealTime());
+        assertEquals(14, new DiaryPage("", "", "", 14).getRealModificationTime());
     }
 
     @Test

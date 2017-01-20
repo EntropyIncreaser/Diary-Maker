@@ -10,6 +10,11 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class Diary {
+    public static final Diary DEBUG_DIARY = new Diary(new DiaryPage("2017-1-1 23:59:59", "Test 1", "Test 1's Content."),
+            new DiaryPage("2017-1-2 23:59:59", "Test 2", "Test 2's Content."),
+            new DiaryPage("2017-1-3 23:59:59", "Test 3", "Test 3's Content."));
+    public static final DiaryPage DEBUG_DIARY_PAGE = new DiaryPage("2017-1-1 23:59:59", "Test 1", "Test 1's Content.");
+
     /**
      * The diary pagesList field.
      */
@@ -131,7 +136,6 @@ public class Diary {
         String[] st = new String[allPages.length];
         for (int i = 0; i < allPages.length; i++) {
             st[i] = allPages[i].getTime();
-            System.out.println(allPages[i].getTime());
         }
         return st;
     }

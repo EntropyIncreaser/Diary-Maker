@@ -3,6 +3,7 @@ package com.github.onsn;
 import com.github.onsn.data.Diary;
 import com.github.onsn.data.DiaryPage;
 import com.github.onsn.data.JsonConverter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -36,6 +37,7 @@ public class DiaryMakerController implements Initializable {
      * The current diary.
      */
     public static Diary currentDiary;
+    public static DiaryPage currentDiaryPage;
     public static File currentDiaryFile;
 
     @FXML public Label timeLabel;
@@ -50,12 +52,46 @@ public class DiaryMakerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        currentDiary = Diary.DEBUG_DIARY;
+
         resources = DiaryMakerController.resources;
         timeLabel.setText(resources.getString("field.time"));
         titleLabel.setText(resources.getString("field.title"));
-        currentDiary = new Diary(new DiaryPage("2017.1.5", "ADASD", "AAAAA"), new DiaryPage("2017.1.1", "ADASD", "AAAAA"), new DiaryPage("2017.1.2", "ADASD", "AAAAA"));
-        updateScene();
+
+        list.selectionModelProperty().getValue().selectedItemProperty().addListener((observable -> {
+            updatePageGraphics();
+        }));
+        updateListGraphics();
     }
+
+    /**
+     * Update the scene with current diary.
+     */
+    public void updateListGraphics() {
+        if (currentDiary == null) return;
+        list.getItems().addAll(currentDiary.getAllPageTitles());
+    }
+
+    public void updatePageGraphics() {
+        int selectedIndex = list.selectionModelProperty().getValue().getSelectedIndex();
+        DiaryPage selectedPage = currentDiary.getPage(selectedIndex);
+
+        timeField.setText(selectedPage.getTime());
+        titleField.setText(selectedPage.getTitle());
+        contentArea.setText(selectedPage.getContent());
+    }
+
+    /**
+     * Set the stage title like this:<br/>
+     * '$value$ - DiaryMaker v$X$.$x$'
+     */
+    public void changeTitleFile(String value) {
+        DiaryMaker.getPrimaryStage().setTitle(value + " - " + resources.getString("title"));
+    }
+
+    /* ----------------------- */
+    /* --- Action Listeners --- */
+    /* ----------------------- */
 
     @FXML public void onTimeButtonAction() {
         timeField.setText(timeFormatter.format(LocalDateTime.now()));
@@ -64,6 +100,7 @@ public class DiaryMakerController implements Initializable {
     @FXML public void onNewAction() {
         currentDiary = new Diary();
         changeTitleFile(resources.getString("unnamed"));
+        updateListGraphics();
     }
 
     @FXML public void onOpenAction() {
@@ -80,6 +117,7 @@ public class DiaryMakerController implements Initializable {
                 e.printStackTrace();
             }
         }
+        updateListGraphics();
     }
 
     @FXML public void onSaveAction() {
@@ -97,19 +135,15 @@ public class DiaryMakerController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        updateListGraphics();
     }
 
-    public void updateScene() {
-        if (currentDiary == null) return;
-        list.getItems().addAll(currentDiary.getAllPageTitles());
+    @FXML public void onAddAction() {
+        currentDiaryPage = new DiaryPage();
+        currentDiary.addPage(currentDiaryPage);
     }
 
+    @FXML public void onSubAction() {
 
-    /**
-     * Set the stage title like this:<br/>
-     * '$value$ - DiaryMaker v$X$.$x$'
-     */
-    public void changeTitleFile(String value) {
-        DiaryMaker.getPrimaryStage().setTitle(value + " - " + resources.getString("title"));
     }
 }

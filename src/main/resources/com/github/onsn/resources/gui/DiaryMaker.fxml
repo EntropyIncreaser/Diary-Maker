@@ -55,9 +55,6 @@
           </menus>
        </MenuBar>
    </top>
-   <left>
-      <ListView fx:id="list" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </left>
    <center>
        <GridPane BorderPane.alignment="CENTER">
            <columnConstraints>
@@ -146,8 +143,50 @@
                      </VBox.margin>
                   </Button>
                </children>
-            </VBox> 
+            </VBox>
           </children>
        </GridPane>
    </center>
+   <left>
+      <GridPane hgap="10.0" prefWidth="224.0" vgap="10.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="24.0" minWidth="24.0" prefWidth="24.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1">
+               <children>
+                  <Button minHeight="24.0" minWidth="24.0" mnemonicParsing="false" onAction="#onAddAction" prefHeight="24.0" prefWidth="24.0">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                           <image>
+                              <Image url="@images/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button minHeight="24.0" minWidth="24.0" mnemonicParsing="false" onAction="#onSubAction" prefHeight="24.0" prefWidth="24.0">
+                     <graphic>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/subtract.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </VBox>
+            <ListView fx:id="list" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="3">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></ListView>
+         </children>
+      </GridPane>
+   </left>
 </BorderPane>
