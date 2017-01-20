@@ -3,6 +3,8 @@ package com.github.onsn;
 import com.github.onsn.data.Diary;
 import com.github.onsn.data.DiaryPage;
 import com.github.onsn.data.JsonConverter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,9 +60,7 @@ public class DiaryMakerController implements Initializable {
         timeLabel.setText(resources.getString("field.time"));
         titleLabel.setText(resources.getString("field.title"));
 
-        list.selectionModelProperty().getValue().selectedItemProperty().addListener((observable -> {
-            updatePageGraphics();
-        }));
+        list.selectionModelProperty().getValue().selectedItemProperty().addListener((observable -> updatePageGraphics()));
         updateListGraphics();
     }
 
@@ -69,12 +69,19 @@ public class DiaryMakerController implements Initializable {
      */
     public void updateListGraphics() {
         if (currentDiary == null) return;
-        list.getItems().addAll(currentDiary.getAllPageTitles());
+        list.setItems(FXCollections.observableArrayList(currentDiary.getAllPageTitles()));
     }
 
     public void updatePageGraphics() {
         int selectedIndex = list.selectionModelProperty().getValue().getSelectedIndex();
-        DiaryPage selectedPage = currentDiary.getPage(selectedIndex);
+        DiaryPage selectedPage;
+        if (selectedIndex != -1) {
+            selectedPage = currentDiary.getPage(selectedIndex);
+        } else {
+            selectedPage = new DiaryPage("", "", "");
+        }
+
+        System.out.println(selectedIndex);
 
         timeField.setText(selectedPage.getTime());
         titleField.setText(selectedPage.getTitle());
@@ -141,9 +148,17 @@ public class DiaryMakerController implements Initializable {
     @FXML public void onAddAction() {
         currentDiaryPage = new DiaryPage();
         currentDiary.addPage(currentDiaryPage);
+
+        updateListGraphics();
+        updatePageGraphics();
     }
 
     @FXML public void onSubAction() {
+        int selectedIndex = list.selectionModelProperty().getValue().getSelectedIndex();
+        if (selectedIndex == -1) return;
+        currentDiary.remove(selectedIndex);
 
+        updateListGraphics();
+        updatePageGraphics();
     }
 }

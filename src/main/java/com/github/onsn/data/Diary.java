@@ -141,6 +141,13 @@ public class Diary {
     }
 
     /**
+     * @see ArrayList#indexOf(Object)
+     */
+    public int indexOf(DiaryPage of) {
+        return pagesList.indexOf(of);
+    }
+
+    /**
      * @see ArrayList#size()
      */
     public int size() {

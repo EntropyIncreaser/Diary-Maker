@@ -1,5 +1,9 @@
 package com.github.onsn.data;
 
+import com.github.onsn.DiaryMakerController;
+
+import java.time.LocalDateTime;
+
 /**
  * Created by OnSN on 2017/1/11.
  *
@@ -24,6 +28,9 @@ public class DiaryPage {
     private long realModificationTime;
 
     public DiaryPage() {
+        this.time = generateTime();
+        this.title = "";
+        this.content = "";
         this.realCreateTime = System.currentTimeMillis();
         this.realModificationTime = this.realCreateTime;
     }
@@ -38,7 +45,8 @@ public class DiaryPage {
         this.time = time;
         this.title = title;
         this.content = content;
-        this.realModificationTime = System.currentTimeMillis();
+        this.realCreateTime = System.currentTimeMillis();
+        this.realModificationTime = this.realCreateTime;
     }
 
 
@@ -54,6 +62,9 @@ public class DiaryPage {
         this.realModificationTime = realCreateTime;
     }
 
+    private String generateTime() {
+        return DiaryMakerController.timeFormatter.format(LocalDateTime.now());
+    }
 
     /**
      * Getter for the time field.
