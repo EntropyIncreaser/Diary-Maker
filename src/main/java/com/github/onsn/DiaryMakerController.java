@@ -40,21 +40,15 @@ public class DiaryMakerController implements Initializable {
     public static DiaryPage currentDiaryPage;
     public static File currentDiaryFile;
 
-    @FXML
-    public final Label timeLabel;
-    @FXML
-    public final TextField timeField;
+    @FXML public Label timeLabel;
+    @FXML public TextField timeField;
 
-    @FXML
-    public final Label titleLabel;
-    @FXML
-    public final TextField titleField;
+    @FXML public Label titleLabel;
+    @FXML public TextField titleField;
 
-    @FXML
-    public final TextArea contentArea;
+    @FXML public TextArea contentArea;
 
-    @FXML
-    public final ListView<String> list;
+    @FXML public ListView<String> list;
     public Label contentLabel;
 
     @Override
@@ -117,20 +111,17 @@ public class DiaryMakerController implements Initializable {
     /* --- Action Listeners --- */
     /* ----------------------- */
 
-    @FXML
-    public void onTimeButtonAction() {
+    @FXML public void onTimeButtonAction() {
         timeField.setText(timeFormatter.format(LocalDateTime.now()));
     }
 
-    @FXML
-    public void onNewAction() {
+    @FXML public void onNewAction() {
         currentDiary = new Diary();
         changeTitleFile(resources.getString("unnamed"));
         update();
     }
 
-    @FXML
-    public void onOpenAction() {
+    @FXML public void onOpenAction() {
         FileChooser fc = new FileChooser();
         fc.setTitle(resources.getString("chooseFile"));
         File open = fc.showOpenDialog(DiaryMaker.getPrimaryStage());
@@ -148,8 +139,7 @@ public class DiaryMakerController implements Initializable {
         update();
     }
 
-    @FXML
-    public void onSaveAction() {
+    @FXML public void onSaveAction() {
         if (currentDiaryFile == null) {
             FileChooser fc = new FileChooser();
             fc.setTitle(resources.getString("chooseFile"));
@@ -191,8 +181,7 @@ public class DiaryMakerController implements Initializable {
         update();
     }
 
-    @FXML
-    public void onAddAction() {
+    @FXML public void onAddAction() {
         currentDiaryPage = new DiaryPage();
         currentDiary.addPage(currentDiaryPage);
 
@@ -205,8 +194,7 @@ public class DiaryMakerController implements Initializable {
         update();
     }
 
-    @FXML
-    public void onSubAction() {
+    @FXML public void onSubAction() {
         int selectedIndex = list.selectionModelProperty().getValue().getSelectedIndex();
         if (selectedIndex == -1) return;
         currentDiary.remove(selectedIndex);
@@ -214,8 +202,7 @@ public class DiaryMakerController implements Initializable {
         update();
     }
 
-    @FXML
-    public void onApplyAction() {
+    @FXML public void onApplyAction() {
         currentDiaryPage.setTitle(titleField.getText());
         currentDiaryPage.setTime(timeField.getText());
         currentDiaryPage.setContent(contentArea.getText());

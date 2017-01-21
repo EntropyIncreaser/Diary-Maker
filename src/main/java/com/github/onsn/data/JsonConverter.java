@@ -9,7 +9,7 @@ import com.google.gson.Gson;
  * @version 1.0
  */
 public class JsonConverter {
-    private static final Gson converter = new Gson();
+    private static Gson converter = new Gson();
 
     /**
      * Can't create a instance of Json Converter.
