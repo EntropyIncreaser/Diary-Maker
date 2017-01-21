@@ -10,21 +10,32 @@ import java.time.LocalDateTime;
  * @author OnSN
  * @version 1.0
  */
+@SuppressWarnings("SameParameterValue")
 public class DiaryPage {
     /* --- Fields --- */
-    /** Display time */
+    /**
+     * Display time
+     */
     private String time;
 
-    /** Display title */
+    /**
+     * Display title
+     */
     private String title;
 
-    /** Display content */
+    /**
+     * Display content
+     */
     private String content;
 
-    /** The real create time. */
+    /**
+     * The real create time.
+     */
     private long realCreateTime;
 
-    /** The real modification time */
+    /**
+     * The real modification time
+     */
     private long realModificationTime;
 
     public DiaryPage() {
@@ -37,8 +48,9 @@ public class DiaryPage {
 
     /**
      * A default constructor for {@code DiaryPage}.
-     * @param time The time of the time text field entered.
-     * @param title The title of the title text field entered.
+     *
+     * @param time    The time of the time text field entered.
+     * @param title   The title of the title text field entered.
      * @param content The content of the content text area entered.
      */
     public DiaryPage(String time, String title, String content) {
@@ -74,39 +86,18 @@ public class DiaryPage {
     }
 
     /**
-     * Getter for the title field.
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Getter for the content field.
-     */
-    public String getContent() {
-        return content;
-    }
-
-    /**
-     * Getter for the realCreateTime field.
-     */
-    public long getRealCreateTime() {
-        return realCreateTime;
-    }
-
-    /**
-     * Getter for the realModificationTime field.
-     */
-    public long getRealModificationTime() {
-        return realModificationTime;
-    }
-
-    /**
      * Setter for the time field.
      */
     public void setTime(String time) {
         this.time = time;
         this.realModificationTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Getter for the title field.
+     */
+    public String getTitle() {
+        return title;
     }
 
     /**
@@ -118,6 +109,13 @@ public class DiaryPage {
     }
 
     /**
+     * Getter for the content field.
+     */
+    public String getContent() {
+        return content;
+    }
+
+    /**
      * Setter for the content field.
      */
     public void setContent(String content) {
@@ -126,11 +124,25 @@ public class DiaryPage {
     }
 
     /**
+     * Getter for the realCreateTime field.
+     */
+    public long getRealCreateTime() {
+        return realCreateTime;
+    }
+
+    /**
      * Setter for the realCreateTime field.
      */
     public void setRealCreateTime(long realCreateTime) {
         this.realCreateTime = realCreateTime;
         this.realModificationTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Getter for the realModificationTime field.
+     */
+    public long getRealModificationTime() {
+        return realModificationTime;
     }
 
     /**

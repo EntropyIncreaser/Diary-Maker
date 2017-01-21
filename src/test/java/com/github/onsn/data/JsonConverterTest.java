@@ -2,7 +2,7 @@ package com.github.onsn.data;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by OnSN on 2017/1/14.

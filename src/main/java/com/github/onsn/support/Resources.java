@@ -8,6 +8,7 @@ import java.net.URL;
  * @author OnSN
  * @version 1.0
  */
+@SuppressWarnings("SameParameterValue")
 public class Resources {
     /**
      * To get a url from resources.

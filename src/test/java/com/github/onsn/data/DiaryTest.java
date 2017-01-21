@@ -1,8 +1,10 @@
 package com.github.onsn.data;
 
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by OnSN on 2017/1/13.
@@ -27,15 +29,15 @@ public class DiaryTest {
 
     @Test
     public void getCreateTime() throws Exception {
-        if (time+1000 > getField.getCreateTime()) return;
-        if (time-1000 < getField.getCreateTime()) return;
+        if (time + 1000 > getField.getCreateTime()) return;
+        if (time - 1000 < getField.getCreateTime()) return;
         assertEquals(getField.getCreateTime(), time);
     }
 
     @Test
     public void getModificationTime() throws Exception {
-        if (time+1000 > getField.getCreateTime()) return;
-        if (time-1000 < getField.getCreateTime()) return;
+        if (time + 1000 > getField.getCreateTime()) return;
+        if (time - 1000 < getField.getCreateTime()) return;
         assertEquals(getField.getCreateTime(), time);
     }
 
@@ -43,14 +45,14 @@ public class DiaryTest {
     public void addPage() throws Exception {
         DiaryPage error = new DiaryPage("Error...!", "Error...!", "Error...!");
         getField.addPage(error);
-        assertEquals(error, getField.getPage(getField.size()-1));
+        assertEquals(error, getField.getPage(getField.size() - 1));
     }
 
     @Test
     public void addPages() throws Exception {
         DiaryPage error = new DiaryPage("Error...!2", "Error...!2", "Error...!2");
         getField.addPages(new DiaryPage("Error...!2", "Error...!2", "Error...!2"), error);
-        assertEquals(error, getField.getPage(getField.size()-1));
+        assertEquals(error, getField.getPage(getField.size() - 1));
     }
 
     @Test
@@ -75,7 +77,7 @@ public class DiaryTest {
 
     @Test
     public void getPage() throws Exception {
-        assertEquals( getField.getPage(0), pages[0]);
+        assertEquals(getField.getPage(0), pages[0]);
     }
 
     @Test

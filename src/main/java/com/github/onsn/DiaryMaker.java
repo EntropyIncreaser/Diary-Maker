@@ -27,6 +27,13 @@ public class DiaryMaker extends Application {
         launch(args);
     }
 
+    /**
+     * Get the primary stage.
+     */
+    public static Stage getPrimaryStage() {
+        return stage;
+    }
+
     @Override
     public void start(Stage primaryStage) {
         FXMLLoader fxmlLoader = new FXMLLoader(Resources.get("/com/github/onsn/resources/gui/DiaryMaker.fxml"));
@@ -52,12 +59,5 @@ public class DiaryMaker extends Application {
 
         stage = primaryStage;
         primaryStage.show();
-    }
-
-    /**
-     * Get the primary stage.
-     */
-    public static Stage getPrimaryStage() {
-        return stage;
     }
 }

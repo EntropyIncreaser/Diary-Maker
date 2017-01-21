@@ -9,6 +9,7 @@ import java.util.Arrays;
  * @author OnSN
  * @version 1.0
  */
+@SuppressWarnings("SameParameterValue")
 public class Diary {
     public static final Diary DEBUG_DIARY = new Diary(new DiaryPage("2017-1-1 23:59:59", "Test 1", "Test 1's Content."),
             new DiaryPage("2017-1-2 23:59:59", "Test 2", "Test 2's Content."),
@@ -66,6 +67,7 @@ public class Diary {
     /* --------------------- */
     /* ------ Setters ------ */
     /* --------------------- */
+
     /**
      * Add a page into the pagesList's last.
      */
@@ -114,6 +116,7 @@ public class Diary {
     /* --------------------- */
     /* ------ Getters ------ */
     /* --------------------- */
+
     /**
      * Get a page with a special position.
      */
