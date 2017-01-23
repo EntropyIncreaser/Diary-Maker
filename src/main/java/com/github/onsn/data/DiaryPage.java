@@ -12,17 +12,18 @@ import java.time.LocalDateTime;
  */
 @SuppressWarnings("SameParameterValue")
 public class DiaryPage {
+    /* -------------- */
     /* --- Fields --- */
+    /* -------------- */
+
     /**
      * Display time
      */
     private String time;
-
     /**
      * Display title
      */
     private String title;
-
     /**
      * Display content
      */
@@ -32,12 +33,21 @@ public class DiaryPage {
      * The real create time.
      */
     private long realCreateTime;
-
     /**
      * The real modification time
      */
     private long realModificationTime;
 
+
+    /* ---------------------------------------- */
+    /* --- Constructors and Support methods --- */
+    /* ---------------------------------------- */
+
+    /**
+     * The time field will be current time.<br/>
+     * And the title and content field will be a empty String.<br/>
+     * realCreateTime and realModificationTime will be current time of now by milli second.
+     */
     public DiaryPage() {
         this.time = generateTime();
         this.title = "";
@@ -61,7 +71,6 @@ public class DiaryPage {
         this.realModificationTime = this.realCreateTime;
     }
 
-
     /**
      * A constructor for the custom real time.<br/>
      * Params: {@link DiaryPage#DiaryPage(String, String, String)}
@@ -74,16 +83,18 @@ public class DiaryPage {
         this.realModificationTime = realCreateTime;
     }
 
+    /**
+     * Generate a String with current time.
+     * @return The String with current time.
+     */
     private String generateTime() {
         return DiaryMakerController.timeFormatter.format(LocalDateTime.now());
     }
 
-    /**
-     * Getter for the time field.
-     */
-    public String getTime() {
-        return time;
-    }
+
+    /* --------------- */
+    /* --- Setters --- */
+    /* --------------- */
 
     /**
      * Setter for the time field.
@@ -91,13 +102,6 @@ public class DiaryPage {
     public void setTime(String time) {
         this.time = time;
         this.realModificationTime = System.currentTimeMillis();
-    }
-
-    /**
-     * Getter for the title field.
-     */
-    public String getTitle() {
-        return title;
     }
 
     /**
@@ -109,25 +113,11 @@ public class DiaryPage {
     }
 
     /**
-     * Getter for the content field.
-     */
-    public String getContent() {
-        return content;
-    }
-
-    /**
      * Setter for the content field.
      */
     public void setContent(String content) {
         this.content = content;
         this.realModificationTime = System.currentTimeMillis();
-    }
-
-    /**
-     * Getter for the realCreateTime field.
-     */
-    public long getRealCreateTime() {
-        return realCreateTime;
     }
 
     /**
@@ -139,19 +129,57 @@ public class DiaryPage {
     }
 
     /**
-     * Getter for the realModificationTime field.
-     */
-    public long getRealModificationTime() {
-        return realModificationTime;
-    }
-
-    /**
      * Setter for the realModificationTime field.
      */
     public void setRealModificationTime(long realModificationTime) {
         this.realModificationTime = realModificationTime;
         this.realModificationTime = System.currentTimeMillis();
     }
+
+
+    /* --------------- */
+    /* --- Getters --- */
+    /* --------------- */
+
+    /**
+     * Getter for the time field.
+     */
+    public String getTime() {
+        return time;
+    }
+
+    /**
+     * Getter for the title field.
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Getter for the content field.
+     */
+    public String getContent() {
+        return content;
+    }
+
+    /**
+     * Getter for the realCreateTime field.
+     */
+    public long getRealCreateTime() {
+        return realCreateTime;
+    }
+
+    /**
+     * Getter for the realModificationTime field.
+     */
+    public long getRealModificationTime() {
+        return realModificationTime;
+    }
+
+
+    /* ------------------------------- */
+    /* --- Override Object Methods --- */
+    /* ------------------------------- */
 
     /**
      * @see Object#equals(Object)

@@ -11,11 +11,6 @@ import java.util.Arrays;
  */
 @SuppressWarnings("SameParameterValue")
 public class Diary {
-    public static final Diary DEBUG_DIARY = new Diary(new DiaryPage("2017-1-1 23:59:59", "Test 1", "Test 1's Content."),
-            new DiaryPage("2017-1-2 23:59:59", "Test 2", "Test 2's Content."),
-            new DiaryPage("2017-1-3 23:59:59", "Test 3", "Test 3's Content."));
-    public static final DiaryPage DEBUG_DIARY_PAGE = new DiaryPage("2017-1-1 23:59:59", "Test 1", "Test 1's Content.");
-
     /**
      * The diary pagesList field.
      */
@@ -25,12 +20,12 @@ public class Diary {
      * Diary's create time.
      */
     private final long createTime;
-
     /**
      * Diary's modification time.<br/>
      * When you use the setters, time will update.
      */
     private long modificationTime;
+
 
     /**
      * A constructor for creating instance for load from a string.
@@ -50,19 +45,6 @@ public class Diary {
         modificationTime = createTime;
     }
 
-    /**
-     * Getter for createTime field.
-     */
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * Getter for modificationTime field.
-     */
-    public long getModificationTime() {
-        return modificationTime;
-    }
 
     /* --------------------- */
     /* ------ Setters ------ */
@@ -155,5 +137,19 @@ public class Diary {
      */
     public int size() {
         return pagesList.size();
+    }
+
+    /**
+     * Getter for createTime field.
+     */
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * Getter for modificationTime field.
+     */
+    public long getModificationTime() {
+        return modificationTime;
     }
 }

@@ -4,13 +4,13 @@ import com.github.onsn.data.Diary;
 import com.github.onsn.data.DiaryPage;
 import com.github.onsn.data.JsonConverter;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,56 +27,81 @@ import java.util.ResourceBundle;
  * @version 1.0
  */
 public class DiaryMakerController implements Initializable {
+
     /**
      * A date time formatter of the pattern: 'YYYY-MM-dd a hh:mm:ss'.
      */
     public static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("YYYY-MM-dd a hh:mm:ss");
-    public static final ResourceBundle resources = ResourceBundle.getBundle("com/github/onsn/resources/lang/diarymaker");
-
     /**
-     * The current diary.
+     * Default resource bundle.
      */
+    public static ResourceBundle resources = ResourceBundle.getBundle("com/github/onsn/resources/lang/diarymaker");
+
+    /* ------------------------------------------ */
+    /* --- Current Diary, DiaryPage, and File --- */
+    /* ------------------------------------------ */
     public static Diary currentDiary;
     public static DiaryPage currentDiaryPage;
     public static File currentDiaryFile;
 
-    @FXML public Label timeLabel;
-    @FXML public TextField timeField;
+    /* ----------------- */
+    /* --- GUI nodes --- */
+    /* ----------------- */
+    @FXML public Menu menuFile;
+    @FXML public MenuItem menuItemFileNew;
+    @FXML public MenuItem menuItemFileOpen;
+    @FXML public MenuItem menuItemFileSave;
 
-    @FXML public Label titleLabel;
-    @FXML public TextField titleField;
+    @FXML public Menu menuHelp;
+    @FXML public MenuItem menuItemHelpAbout;
 
-    @FXML public TextArea contentArea;
+    @FXML public TextArea areaContent;
 
-    @FXML public ListView<String> list;
-    public Label contentLabel;
+    @FXML public Label labelDate;
+    @FXML public Label labelTitle;
+
+    @FXML public TextField fieldDate;
+    @FXML public TextField fieldTitle;
+
+    @FXML public ListView<String> listDiary;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        resources = DiaryMakerController.resources;
-        timeLabel.setText(resources.getString("field.time"));
-        titleLabel.setText(resources.getString("field.title"));
-
-        list.selectionModelProperty().getValue().selectedItemProperty().addListener((observable -> updatePage()));
-
+        updateLang(DiaryMakerController.resources);
+        listDiary.selectionModelProperty().getValue().selectedItemProperty().addListener((observable -> updatePage())); //Set the select listener.
         update();
     }
 
+    /**
+     * Update the gui language with appointed resources bundle.
+     */
+    public void updateLang(ResourceBundle resources) {
+        menuFile.setText(resources.getString(menuFile.getText()));
+        menuItemFileNew.setText(resources.getString(menuItemFileNew.getText()));
+        menuItemFileOpen.setText(resources.getString(menuItemFileOpen.getText()));
+        menuItemFileSave.setText(resources.getString(menuItemFileSave.getText()));
+
+        menuHelp.setText(resources.getString(menuHelp.getText()));
+        menuItemHelpAbout.setText(resources.getString(menuItemHelpAbout.getText()));
+
+        labelDate.setText(resources.getString(labelDate.getText()));
+        labelTitle.setText(resources.getString(labelTitle.getText()));
+    }
     /**
      * Update the list with current diary.
      */
     public void updateList() {
         if (currentDiary == null) return;
-        int select = list.selectionModelProperty().getValue().getSelectedIndex();
-        list.setItems(FXCollections.observableArrayList(currentDiary.getAllPageTitles()));
-        list.selectionModelProperty().getValue().select(select);
+        int select = listDiary.selectionModelProperty().getValue().getSelectedIndex();
+        listDiary.setItems(FXCollections.observableArrayList(currentDiary.getAllPageTitles()));
+        listDiary.selectionModelProperty().getValue().select(select);
     }
-
     /**
      * Update the page scene with current diary page.
      */
     public void updatePage() {
-        int selectedIndex = list.selectionModelProperty().getValue().getSelectedIndex();
+        int selectedIndex = listDiary.selectionModelProperty().getValue().getSelectedIndex();
         DiaryPage selectedPage;
         if (selectedIndex != -1) {
             selectedPage = currentDiary.getPage(selectedIndex);
@@ -86,11 +111,10 @@ public class DiaryMakerController implements Initializable {
 
         currentDiaryPage = selectedPage;
 
-        timeField.setText(selectedPage.getTime());
-        titleField.setText(selectedPage.getTitle());
-        contentArea.setText(selectedPage.getContent());
+        fieldDate.setText(selectedPage.getTime());
+        fieldTitle.setText(selectedPage.getTitle());
+        areaContent.setText(selectedPage.getContent());
     }
-
     /**
      * Update the scene.
      */
@@ -98,7 +122,6 @@ public class DiaryMakerController implements Initializable {
         updateList();
         updatePage();
     }
-
     /**
      * Set the stage title like this:<br/>
      * '$value$ - DiaryMaker v$X$.$x$'
@@ -107,12 +130,13 @@ public class DiaryMakerController implements Initializable {
         DiaryMaker.getPrimaryStage().setTitle(value + " - " + resources.getString("title"));
     }
 
+
     /* ----------------------- */
     /* --- Action Listeners --- */
     /* ----------------------- */
 
     @FXML public void onTimeButtonAction() {
-        timeField.setText(timeFormatter.format(LocalDateTime.now()));
+        fieldTitle.setText(timeFormatter.format(LocalDateTime.now()));
     }
 
     @FXML public void onNewAction() {
@@ -189,13 +213,13 @@ public class DiaryMakerController implements Initializable {
 
         update();
 
-        list.selectionModelProperty().get().select(i);
+        listDiary.selectionModelProperty().get().select(i);
 
         update();
     }
 
     @FXML public void onSubAction() {
-        int selectedIndex = list.selectionModelProperty().getValue().getSelectedIndex();
+        int selectedIndex = listDiary.selectionModelProperty().getValue().getSelectedIndex();
         if (selectedIndex == -1) return;
         currentDiary.remove(selectedIndex);
 
@@ -203,10 +227,14 @@ public class DiaryMakerController implements Initializable {
     }
 
     @FXML public void onApplyAction() {
-        currentDiaryPage.setTitle(titleField.getText());
-        currentDiaryPage.setTime(timeField.getText());
-        currentDiaryPage.setContent(contentArea.getText());
+        currentDiaryPage.setTitle(fieldTitle.getText());
+        currentDiaryPage.setTime(fieldDate.getText());
+        currentDiaryPage.setContent(areaContent.getText());
 
         update();
+    }
+
+    @FXML public void onShowAboutAction() {
+        AboutDialog.show();
     }
 }
